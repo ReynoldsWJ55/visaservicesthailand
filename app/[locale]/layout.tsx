@@ -3,8 +3,8 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Inter } from "next/font/google";
 import "../globals.css";
-const locales = ["en", "th", "zh"] as const;
 
+const locales = ["en", "th", "zh"] as const;
 const inter = Inter({ subsets: ["latin"] });
 
 export function generateStaticParams() {

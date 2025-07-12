@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+// This page is not used - middleware redirects to /en
 export default function RootPage() {
-  redirect("/en");
+  return null;
 }

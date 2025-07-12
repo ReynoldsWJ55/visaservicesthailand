@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
-    "build:export": "npm run build && npm run export",
     "start": "next start",
     "type-check": "tsc --noEmit",
     "lint": "next lint",
