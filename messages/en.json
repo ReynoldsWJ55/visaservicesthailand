@@ -1,0 +1,140 @@
+{
+  "nav": {
+    "home": "Home",
+    "agencies": "Find Agencies",
+    "thaiVisas": "Thai Visas",
+    "foreignVisas": "Foreign Visas",
+    "guides": "Guides",
+    "about": "About"
+  },
+  "search": {
+    "placeholder": "Search visa services...",
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "results": "{count} agencies found",
+    "noResults": "No agencies found"
+  },
+  "agency": {
+    "viewDetails": "View Details",
+    "contact": "Contact",
+    "verified": "Verified",
+    "featured": "Featured",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "location": "Location",
+    "services": "Services",
+    "languages": "Languages spoken",
+    "established": "Established"
+  },
+  "filters": {
+    "city": "City",
+    "allCities": "All cities",
+    "visaType": "Visa Type",
+    "allVisaTypes": "All visa types",
+    "verifiedOnly": "Verified agencies only",
+    "clear": "Clear filters"
+  },
+  "sort": {
+    "featured": "Featured first",
+    "name": "Name (A-Z)",
+    "rating": "Highest rated",
+    "verified": "Verified first",
+    "location": "By location"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "tryAgain": "Try again",
+    "readMore": "Read more",
+    "showLess": "Show less"
+  },
+  "homepage": {
+    "title": "Visa Services Thailand Directory",
+    "hero": {
+      "heading": "Find Trusted Visa Services in Thailand",
+      "description": "Comprehensive directory of verified visa agencies across Thailand. Get help with Thai visas, foreign visas, and immigration services in English, Thai, and Chinese.",
+      "searchPlaceholder": "Search visa services...",
+      "searchButton": "Search Agencies"
+    },
+    "filters": {
+      "allCities": "All Cities",
+      "allServices": "All Services",
+      "serviceCategory": "I need help with...",
+      "specificService": "Specific Service",
+      "selectCategoryFirst": "Select Category First",
+      "allInCategory": "All in Category",
+      "categories": {
+        "thaiVisas": "Thai Visas (for foreigners)",
+        "foreignVisas": "Foreign Visas (for other countries)",
+        "governmentServices": "Government Services",
+        "financialServices": "Financial Services",
+        "legalServices": "Legal Services",
+        "businessServices": "Business Services"
+      }
+    },
+    "services": {
+      "thaiVisas": {
+        "tourist": "Tourist Visa",
+        "business": "Business Visa",
+        "retirement": "Retirement Visa",
+        "education": "Education Visa",
+        "privilege": "Privilege (Elite) Visa",
+        "dtv": "DTV (Digital Nomad Visa)"
+      },
+      "foreignVisas": {
+        "usa": "USA Visa",
+        "uk": "UK Visa",
+        "schengen": "Schengen Visa",
+        "australia": "Australia Visa",
+        "canada": "Canada Visa",
+        "china": "China Visa"
+      },
+      "government": {
+        "driversLicense": "Driver's License",
+        "taxId": "Tax ID",
+        "residenceCertificate": "Residence Certificate",
+        "workPermit": "Work Permit"
+      },
+      "financial": {
+        "bankAccount": "Bank Account Opening",
+        "insurance": "Insurance Services"
+      },
+      "legal": {
+        "companyRegistration": "Company Registration",
+        "marriageRegistration": "Marriage Registration",
+        "translation": "Translation Services",
+        "notarization": "Notarization"
+      },
+      "business": {
+        "accounting": "Accounting Services",
+        "taxFiling": "Tax Filing"
+      }
+    },
+    "explanations": {
+      "thaiVisas": "Services for foreigners seeking to enter or stay in Thailand. Includes tourist, business, retirement, education, Privilege (Elite), and DTV visas.",
+      "foreignVisas": "Services for anyone seeking visas for countries other than Thailand. Includes visas for USA, Europe, Australia, and other countries.",
+      "government": "Official Thai government document and permit services. Includes driver's license, tax ID, residence certificates, and work permits.",
+      "financial": "Banking, insurance, and financial assistance. Includes bank account opening and insurance services for foreigners.",
+      "legal": "Legal documentation and registration services. Includes company registration, marriage registration, and document translation.",
+      "business": "Professional business support services. Includes accounting, tax filing, and business consulting."
+    },
+    "features": {
+      "verified": {
+        "title": "Verified Agencies",
+        "description": "All agencies are verified through in-person visits and document checks"
+      },
+      "multilingual": {
+        "title": "Multilingual Support",
+        "description": "Directory available in English, Thai, and Chinese languages"
+      },
+      "contact": {
+        "title": "Direct Contact",
+        "description": "Contact agencies directly through verified phone numbers and emails"
+      }
+    }
+  }
+}

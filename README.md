@@ -87,43 +87,48 @@ visa-services-thailand/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone git@github.com:ReynoldsWJ55/visaservicesthailand.git
    cd visaservicesthailand
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Configure your `.env.local` file:
+
    ```env
    # Site Configuration
    NEXT_PUBLIC_SITE_URL=https://visaservicesthailand.directory
-   
+
    # Google APIs
    GOOGLE_PLACES_API_KEY=your_google_places_api_key
    NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY=your_maps_embed_key
-   
+
    # Form Handling
    NEXT_PUBLIC_FORMSPREE_ENDPOINT=your_formspree_endpoint
    NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
    RECAPTCHA_SECRET_KEY=your_recaptcha_secret
-   
+
    # SEO & Indexing
    NEXT_PUBLIC_INDEXNOW_KEY=your_indexnow_key
-   
+
    # Analytics
    NEXT_PUBLIC_PLAUSIBLE_DOMAIN=visaservicesthailand.directory
    ```
 
 4. **Start development server**
+
    ```bash
    npm run dev
    ```
@@ -217,13 +222,13 @@ author:
 # Your content here
 
 Use custom components:
+
 <VisaRequirement title="Required Documents">
-- Valid passport
-- Proof of funds
+  - Valid passport - Proof of funds
 </VisaRequirement>
 
 <ImportantNote>
-Always verify current requirements with embassies.
+  Always verify current requirements with embassies.
 </ImportantNote>
 ```
 
@@ -232,7 +237,7 @@ Always verify current requirements with embassies.
 The site supports three languages with different content strategies:
 
 - **English**: Full content and agency listings
-- **Thai**: Full content and agency listings  
+- **Thai**: Full content and agency listings
 - **Chinese**: UI/navigation only, agency listings in English
 
 Add translations in `messages/{locale}.json`:
@@ -265,12 +270,12 @@ The platform includes comprehensive SEO features:
 
 ```css
 :root {
-  --primary: #1e40af;        /* Professional blue */
-  --secondary: #10b981;      /* Success green */
-  --text-primary: #111827;   /* Almost black */
+  --primary: #1e40af; /* Professional blue */
+  --secondary: #10b981; /* Success green */
+  --text-primary: #111827; /* Almost black */
   --text-secondary: #6b7280; /* Gray */
-  --background: #ffffff;     /* White */
-  --border: #e5e7eb;         /* Light gray */
+  --background: #ffffff; /* White */
+  --border: #e5e7eb; /* Light gray */
 }
 ```
 
@@ -341,6 +346,7 @@ The site deploys automatically to Cloudflare Pages:
 ## 🔮 Future Roadmap
 
 ### Phase 1: Core Platform (Weeks 1-6)
+
 - [x] Next.js setup with Cloudflare Pages
 - [x] Trilingual support implementation
 - [x] Agency verification system
@@ -352,6 +358,7 @@ The site deploys automatically to Cloudflare Pages:
 - [ ] Launch preparation
 
 ### Phase 2: Enhancement (Weeks 7-10)
+
 - [ ] Google Reviews integration
 - [ ] City-specific landing pages
 - [ ] Advanced search filters
@@ -360,6 +367,7 @@ The site deploys automatically to Cloudflare Pages:
 - [ ] 100+ agencies across Thailand
 
 ### Phase 3: Expansion (Months 3-6)
+
 - [ ] Nationwide coverage (Phuket, Chiang Mai, Pattaya)
 - [ ] Featured listing monetization
 - [ ] Agency dashboard
@@ -367,6 +375,7 @@ The site deploys automatically to Cloudflare Pages:
 - [ ] Mobile app consideration
 
 ### Future Features
+
 - [ ] **Authentication**: NextAuth.js for agency accounts
 - [ ] **Payments**: Stripe integration for featured listings
 - [ ] **Real-time**: Live chat and notifications
@@ -407,15 +416,18 @@ We welcome contributions to improve the Visa Services Thailand Directory:
 ## 📞 Support & Contact
 
 ### For Users
+
 - **Website**: [visaservicesthailand.directory](https://visaservicesthailand.directory)
 - **Issues**: Report problems via [GitHub Issues](https://github.com/ReynoldsWJ55/visaservicesthailand/issues)
 
 ### For Agencies
+
 - **Agency Listings**: Free verification and listing
 - **Featured Placement**: Contact for premium options
 - **Updates**: Submit changes via contact form
 
 ### For Developers
+
 - **Documentation**: See [CLAUDE.md](CLAUDE.md) for detailed technical guidance
 - **GitHub**: [ReynoldsWJ55/visaservicesthailand](https://github.com/ReynoldsWJ55/visaservicesthailand)
 
@@ -436,4 +448,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built with ❤️ for the Thailand expat community**
 
-*Helping people navigate visa services with confidence and transparency*
+_Helping people navigate visa services with confidence and transparency_

@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Local environment files
+.env*.local
+
+# Vercel
+.vercel
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Claude settings
+.claude/

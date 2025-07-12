@@ -134,10 +134,7 @@ npm run test:coverage # Run tests with coverage
 ```json
 // .eslintrc.json
 {
-  "extends": [
-    "next/core-web-vitals",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "prettier"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
     "prefer-const": "error"
@@ -265,14 +262,14 @@ interface Agency {
     thaiVisas: {
       types: string[]; // ['retirement', 'business', 'tourist', 'education', 'dtv']
       specialties: string[]; // ['urgent-processing', 'complex-cases', 'renewal-specialist']
-      expertise: 'basic' | 'advanced' | 'expert';
+      expertise: "basic" | "advanced" | "expert";
     };
     foreignVisas: {
       countries: string[]; // ['usa', 'uk', 'schengen', 'australia', 'canada', 'china']
       specialties: string[]; // ['business-travel', 'family-reunion', 'student-visas']
-      expertise: 'basic' | 'advanced' | 'expert';
+      expertise: "basic" | "advanced" | "expert";
     };
-    
+
     // Additional services many agencies offer
     financialServices: {
       bankAccount: boolean;
@@ -281,7 +278,7 @@ interface Agency {
       insuranceTypes?: string[]; // ['health', 'vehicle', 'life', 'travel']
       mortgageAssistance: boolean;
     };
-    
+
     legalServices: {
       companyRegistration: boolean;
       workPermit: boolean;
@@ -290,7 +287,7 @@ interface Agency {
       contractReview: boolean;
       legalConsultation: boolean;
     };
-    
+
     governmentServices: {
       driversLicense: boolean;
       taxId: boolean;
@@ -298,7 +295,7 @@ interface Agency {
       policeCheck: boolean;
       extensionOfStay: boolean;
     };
-    
+
     businessServices: {
       accountingServices: boolean;
       taxFiling: boolean;
@@ -306,7 +303,7 @@ interface Agency {
       businessLicensing: boolean;
       intellectualProperty: boolean;
     };
-    
+
     personalServices: {
       translation: boolean;
       translationLanguages?: string[]; // ['thai-english', 'thai-chinese', 'english-chinese']
@@ -314,23 +311,27 @@ interface Agency {
       apostille: boolean;
       documentAuthentication: boolean;
     };
-    
+
     technologyServices: {
       phoneSimCard: boolean;
       internetSetup: boolean;
       bankingAppSetup: boolean;
       digitalWalletSetup: boolean;
     };
-    
+
     realEstateServices: {
       propertySearch: boolean;
       propertyLegal: boolean;
       rentAgreements: boolean;
       propertyManagement: boolean;
     };
-    
+
     // Service categories for easy filtering
-    primaryCategory: 'visa-specialist' | 'full-service' | 'legal-services' | 'business-services';
+    primaryCategory:
+      | "visa-specialist"
+      | "full-service"
+      | "legal-services"
+      | "business-services";
     serviceCategories: string[]; // ['visas', 'banking', 'legal', 'government', 'business', 'personal', 'real-estate']
   };
 
@@ -400,21 +401,21 @@ interface ServiceFilter {
   // Visa services
   visaTypes?: string[];
   visaCountries?: string[];
-  
+
   // Non-visa services
   bankAccount?: boolean;
   driversLicense?: boolean;
   companyRegistration?: boolean;
   translation?: boolean;
   realEstate?: boolean;
-  
+
   // Service categories
   categories?: string[];
   primaryCategory?: string[];
-  
+
   // Expertise level
   visaExpertise?: ('basic' | 'advanced' | 'expert')[];
-  
+
   // Location and other existing filters
   city?: string;
   verified?: boolean;
@@ -428,28 +429,28 @@ export function ServiceFilterPanel() {
   return (
     <div className="bg-white rounded-lg shadow-sm border p-6">
       <h3 className="text-lg font-semibold mb-4">Find Services</h3>
-      
+
       {/* Quick Service Buttons */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
-        <ServiceQuickFilter 
+        <ServiceQuickFilter
           icon="visa"
           label="Visa Services"
           active={filters.categories?.includes('visas')}
           onClick={() => toggleFilter('categories', 'visas')}
         />
-        <ServiceQuickFilter 
+        <ServiceQuickFilter
           icon="bank"
           label="Bank Account"
           active={filters.bankAccount}
           onClick={() => setFilters({...filters, bankAccount: !filters.bankAccount})}
         />
-        <ServiceQuickFilter 
+        <ServiceQuickFilter
           icon="license"
           label="Driver's License"
           active={filters.driversLicense}
           onClick={() => setFilters({...filters, driversLicense: !filters.driversLicense})}
         />
-        <ServiceQuickFilter 
+        <ServiceQuickFilter
           icon="business"
           label="Company Setup"
           active={filters.companyRegistration}
@@ -468,8 +469,8 @@ export function ServiceFilterPanel() {
           <div className="grid grid-cols-2 gap-2">
             {THAI_VISA_TYPES.map(visa => (
               <label key={visa} className="flex items-center">
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   checked={filters.visaTypes?.includes(visa)}
                   onChange={() => toggleFilter('visaTypes', visa)}
                 />
@@ -487,8 +488,8 @@ export function ServiceFilterPanel() {
         >
           <div className="space-y-2">
             <label className="flex items-center">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={filters.bankAccount}
                 onChange={() => setFilters({...filters, bankAccount: !filters.bankAccount})}
               />
@@ -506,8 +507,8 @@ export function ServiceFilterPanel() {
         >
           <div className="space-y-2">
             <label className="flex items-center">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={filters.driversLicense}
                 onChange={() => setFilters({...filters, driversLicense: !filters.driversLicense})}
               />
@@ -543,15 +544,15 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
             <h3 className="text-xl font-semibold">{agency.name}</h3>
             <AgencyTypeBadge type={agency.services.primaryCategory} />
           </div>
-          
+
           <p className="text-sm text-gray-600 mb-2">
             {agency.locations[0].district}, {agency.locations[0].city}
           </p>
-          
+
           {/* Primary Services - Always Visible */}
           <div className="flex flex-wrap gap-2 mb-3">
             {primaryServices.map((service) => (
-              <ServiceBadge 
+              <ServiceBadge
                 key={service.id}
                 service={service}
                 type="primary"
@@ -560,7 +561,7 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
             ))}
           </div>
         </div>
-        
+
         <VerificationBadge verification={agency.verification} />
       </header>
 
@@ -577,7 +578,7 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
             whileTap={{ scale: 0.95 }}
           >
             <span>
-              {showAllServices ? 'Hide' : 'Show'} additional services 
+              {showAllServices ? 'Hide' : 'Show'} additional services
               ({additionalServices.length})
             </span>
             <motion.svg
@@ -589,7 +590,7 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
               <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
             </motion.svg>
           </motion.button>
-          
+
           <AnimatePresence>
             {showAllServices && (
               <motion.div
@@ -600,7 +601,7 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
               >
                 <div className="flex flex-wrap gap-2">
                   {additionalServices.map((service) => (
-                    <ServiceBadge 
+                    <ServiceBadge
                       key={service.id}
                       service={service}
                       type="secondary"
@@ -641,9 +642,9 @@ export function MultiServiceAgencyCard({ agency }: { agency: Agency }) {
             </div>
           )}
         </div>
-        
+
         <div className="flex gap-3">
-          <ContactButton 
+          <ContactButton
             href={`tel:${agency.contact.phone[0]}`}
             icon={<PhoneIcon className="w-4 h-4" />}
             label={`Call ${agency.name}`}
@@ -670,7 +671,7 @@ function AgencyTypeBadge({ type }: { type: Agency['services']['primaryCategory']
   };
 
   const { label, color } = config[type];
-  
+
   return (
     <span className={`px-2 py-1 text-xs rounded-full bg-${color}-100 text-${color}-800`}>
       {label}
@@ -678,20 +679,20 @@ function AgencyTypeBadge({ type }: { type: Agency['services']['primaryCategory']
   );
 }
 
-function ServiceBadge({ 
-  service, 
+function ServiceBadge({
+  service,
   type = 'primary',
-  expertise 
-}: { 
-  service: any; 
+  expertise
+}: {
+  service: any;
   type?: 'primary' | 'secondary';
   expertise?: string;
 }) {
   const baseClasses = "px-2 py-1 text-xs rounded flex items-center gap-1";
-  const typeClasses = type === 'primary' 
-    ? "bg-blue-100 text-blue-800 font-medium" 
+  const typeClasses = type === 'primary'
+    ? "bg-blue-100 text-blue-800 font-medium"
     : "bg-gray-100 text-gray-700";
-  
+
   return (
     <span className={`${baseClasses} ${typeClasses}`}>
       <ServiceIcon type={service.category} />
@@ -714,7 +715,7 @@ function ExpertiseBadge({ level }: { level: 'advanced' | 'expert' }) {
 // Service utility functions
 function getPrimaryServices(agency: Agency) {
   const services = [];
-  
+
   // Add visa services as primary
   if (agency.services.thaiVisas.types.length > 0) {
     services.push({
@@ -724,7 +725,7 @@ function getPrimaryServices(agency: Agency) {
       expertise: agency.services.thaiVisas.expertise
     });
   }
-  
+
   if (agency.services.foreignVisas.countries.length > 0) {
     services.push({
       id: 'foreign-visas',
@@ -733,54 +734,54 @@ function getPrimaryServices(agency: Agency) {
       expertise: agency.services.foreignVisas.expertise
     });
   }
-  
+
   return services.slice(0, 3); // Limit primary services display
 }
 
 function getAdditionalServices(agency: Agency) {
   const services = [];
-  
+
   // Add non-visa services
   if (agency.services.financialServices.bankAccount) {
     services.push({ id: 'bank-account', label: 'Bank Account', category: 'financial' });
   }
-  
+
   if (agency.services.governmentServices.driversLicense) {
     services.push({ id: 'drivers-license', label: 'Driver\'s License', category: 'government' });
   }
-  
+
   if (agency.services.legalServices.companyRegistration) {
     services.push({ id: 'company-setup', label: 'Company Registration', category: 'legal' });
   }
-  
+
   if (agency.services.personalServices.translation) {
     services.push({ id: 'translation', label: 'Translation Services', category: 'personal' });
   }
-  
+
   // Add more services based on agency configuration
-  
+
   return services;
 }
 
 function getServiceCombinations(agency: Agency) {
   const combinations = [];
-  
+
   // Define popular service combinations
-  if (agency.services.thaiVisas.types.includes('retirement') && 
+  if (agency.services.thaiVisas.types.includes('retirement') &&
       agency.services.financialServices.bankAccount) {
     combinations.push('Retirement Visa + Bank Account');
   }
-  
-  if (agency.services.thaiVisas.types.includes('business') && 
+
+  if (agency.services.thaiVisas.types.includes('business') &&
       agency.services.legalServices.companyRegistration) {
     combinations.push('Business Visa + Company Setup');
   }
-  
-  if (agency.services.governmentServices.driversLicense && 
+
+  if (agency.services.governmentServices.driversLicense &&
       agency.services.financialServices.bankAccount) {
     combinations.push('Driver\'s License + Banking');
   }
-  
+
   return combinations;
 }
 ```
@@ -791,20 +792,20 @@ function getServiceCombinations(agency: Agency) {
 // app/[locale]/services/[service]/page.tsx
 export default function ServicePage({ params }: { params: { service: string, locale: string }}) {
   const agencies = getAgenciesByService(params.service);
-  
+
   return (
     <div>
       <ServiceHero service={params.service} />
-      
+
       {/* Service-specific filters */}
       <ServiceSpecificFilters service={params.service} />
-      
+
       {/* Agencies grouped by expertise/category */}
       <div className="space-y-8">
         <ExpertAgencies agencies={agencies.filter(a => hasExpertise(a, params.service))} />
         <AllAgencies agencies={agencies} />
       </div>
-      
+
       {/* Related services suggestions */}
       <RelatedServices currentService={params.service} />
     </div>
@@ -813,7 +814,7 @@ export default function ServicePage({ params }: { params: { service: string, loc
 
 // Example URLs:
 // /services/bank-account
-// /services/company-registration  
+// /services/company-registration
 // /services/drivers-license
 // /services/thai-retirement-visa
 ```
@@ -837,7 +838,7 @@ sticky: false # Pin to top of blog
 # Content Classification
 category: "banking-guides" # visa-guides, banking-guides, legal-guides, government-services, expat-tips
 subcategory: "bank-accounts"
-tags: 
+tags:
   - "thai-bank-account"
   - "banking-for-foreigners"
   - "expat-banking"
@@ -845,14 +846,14 @@ tags:
   - "financial-services"
 topicTags:
   - "Bangkok Bank"
-  - "Kasikorn Bank" 
+  - "Kasikorn Bank"
   - "SCB"
   - "bank requirements"
 difficulty: "intermediate" # beginner, intermediate, advanced
 estimatedReadTime: 12 # minutes
 
 # Author & Attribution
-author: 
+author:
   name: "Sarah Thompson"
   role: "Banking Specialist"
   bio: "Expat banking consultant with 8 years experience helping foreigners navigate Thai financial services"
@@ -959,7 +960,7 @@ analytics:
   campaignMedium: "organic"
   campaignName: "banking-guide-2024"
   contentGroup: "banking-guides"
-  
+
 # Content Warnings & Legal
 disclaimers:
   - "Banking requirements can change. Verify current requirements with banks."
@@ -1014,10 +1015,10 @@ grammarScore: 95 # Grammarly score
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    
+
     // Internationalization
     "next-intl": "^3.0.0",
-    
+
     // Styling & UI
     "tailwindcss": "^3.3.0",
     "autoprefixer": "^10.4.16",
@@ -1027,10 +1028,10 @@ grammarScore: 95 # Grammarly score
     "class-variance-authority": "^0.7.0", // Dynamic classes
     "clsx": "^2.0.0", // Conditional classes
     "tailwind-merge": "^2.0.0", // Merge Tailwind classes
-    
+
     // Animation
     "framer-motion": "^10.16.4",
-    
+
     // MDX & Content
     "@next/mdx": "^14.0.0",
     "@mdx-js/loader": "^3.0.0",
@@ -1043,53 +1044,53 @@ grammarScore: 95 # Grammarly score
     "rehype-highlight": "^7.0.0", // Syntax highlighting
     "rehype-slug": "^6.0.0", // Add IDs to headings
     "rehype-autolink-headings": "^7.0.0", // Auto-link headings
-    
+
     // Search & Filtering
     "fuse.js": "^7.0.0", // Fuzzy search
     "@tanstack/react-query": "^5.0.0", // Data fetching/caching
     "use-debounce": "^10.0.0", // Debounced search
-    
+
     // Forms & Validation
     "react-hook-form": "^7.47.0",
     "zod": "^3.22.4", // Schema validation
     "@hookform/resolvers": "^3.3.2",
     "react-google-recaptcha-v3": "^1.10.1",
-    
+
     // Maps & Location
     "@googlemaps/react-wrapper": "^1.1.35",
     "@googlemaps/js-api-loader": "^1.16.2",
-    
+
     // Date handling
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0", // Timezone support
-    
+
     // Utilities
     "lodash.debounce": "^4.0.8",
     "uuid": "^9.0.1",
     "slugify": "^1.6.6", // URL slug generation
-    
+
     // Image handling
     "sharp": "^0.32.6", // Image optimization
     "next-cloudinary": "^5.0.0", // Cloudinary integration (future)
-    
+
     // Analytics & SEO
     "next-sitemap": "^4.2.3", // Sitemap generation
     "@vercel/analytics": "^1.1.1", // Vercel Analytics
     "next-seo": "^6.4.0", // SEO optimization
-    
+
     // Data handling (future database migration)
     "@supabase/supabase-js": "^2.38.0", // Supabase client
     "prisma": "^5.6.0", // Database ORM
     "@prisma/client": "^5.6.0",
-    
+
     // API & External Services
     "axios": "^1.6.0", // HTTP client
     "ky": "^1.0.0", // Modern fetch wrapper
-    
+
     // Performance monitoring
     "@sentry/nextjs": "^7.77.0", // Error tracking
     "web-vitals": "^3.5.0", // Core Web Vitals
-    
+
     // Development Quality
     "husky": "^8.0.3", // Git hooks
     "lint-staged": "^15.0.2", // Lint staged files
@@ -1106,7 +1107,7 @@ grammarScore: 95 # Grammarly score
     "@types/mdx": "^2.0.9",
     "@types/uuid": "^9.0.6",
     "@types/lodash.debounce": "^4.0.9",
-    
+
     // Testing
     "jest": "^29.7.0",
     "@testing-library/react": "^13.4.0",
@@ -1115,7 +1116,7 @@ grammarScore: 95 # Grammarly score
     "jest-environment-jsdom": "^29.7.0",
     "playwright": "^1.40.0", // E2E testing
     "@playwright/test": "^1.40.0",
-    
+
     // Linting & Formatting
     "eslint": "^8.53.0",
     "eslint-config-next": "^14.0.0",
@@ -1125,18 +1126,18 @@ grammarScore: 95 # Grammarly score
     "eslint-plugin-import": "^2.29.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.7",
-    
+
     // Build & Development
     "@tailwindcss/typography": "^0.5.10", // Better typography
     "@tailwindcss/forms": "^0.5.7", // Form styling
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "tailwindcss-animate": "^1.0.7", // Animation utilities
-    
+
     // Documentation
     "typedoc": "^0.25.3", // API documentation
     "storybook": "^7.5.3", // Component documentation
     "@storybook/nextjs": "^7.5.3",
-    
+
     // Performance Analysis
     "@next/bundle-analyzer": "^14.0.0",
     "lighthouse": "^11.2.0"
@@ -1280,7 +1281,12 @@ grammarScore: 95 # Grammarly score
 }
 
 /* Typography */
-font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+font-family:
+  Inter,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
 
 /* Components follow minimal, clean design */
 /* No emojis - use custom SVG icons only */
@@ -1347,12 +1353,12 @@ export const PhoneIcon = ({ className }: { className?: string }) => (
 // components/ui/FadeIn.tsx
 import { motion } from "framer-motion";
 
-export function FadeIn({ 
-  children, 
+export function FadeIn({
+  children,
   delay = 0,
   className = ""
-}: { 
-  children: React.ReactNode; 
+}: {
+  children: React.ReactNode;
   delay?: number;
   className?: string;
 }) {
@@ -1424,8 +1430,8 @@ export function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
     <nav aria-label="Breadcrumb" className="py-4">
       <ol className="flex items-center space-x-2 text-sm">
         <li>
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-blue-600 hover:text-blue-800 transition-colors"
             aria-label={t("home")}
           >
@@ -1433,34 +1439,34 @@ export function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
           </Link>
         </li>
         {items.map((item, index) => (
-          <motion.li 
+          <motion.li
             key={index}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
             className="flex items-center"
           >
-            <svg 
-              className="w-4 h-4 mx-2 text-gray-400" 
-              fill="currentColor" 
+            <svg
+              className="w-4 h-4 mx-2 text-gray-400"
+              fill="currentColor"
               viewBox="0 0 20 20"
               aria-hidden="true"
             >
-              <path 
-                fillRule="evenodd" 
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" 
-                clipRule="evenodd" 
+              <path
+                fillRule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clipRule="evenodd"
               />
             </svg>
             {item.current ? (
-              <span 
-                className="text-gray-900 font-medium" 
+              <span
+                className="text-gray-900 font-medium"
                 aria-current="page"
               >
                 {item.label}
               </span>
             ) : (
-              <Link 
+              <Link
                 href={item.href!}
                 className="text-blue-600 hover:text-blue-800 transition-colors"
               >
@@ -1503,11 +1509,11 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
     >
       <header className="flex justify-between items-start mb-4">
         <div>
-          <h3 
+          <h3
             id={`agency-${agency.id}-name`}
             className="text-xl font-semibold text-gray-900"
           >
-            <Link 
+            <Link
               href={`/agencies/${agency.slug}`}
               className="hover:text-blue-600 focus:text-blue-600 focus:outline-none"
               aria-describedby={`agency-${agency.id}-location`}
@@ -1515,7 +1521,7 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
               {agency.name}
             </Link>
           </h3>
-          <p 
+          <p
             id={`agency-${agency.id}-location`}
             className="text-sm text-gray-600"
             aria-label={`Located in ${agency.locations[0].district}, ${agency.locations[0].city}`}
@@ -1523,9 +1529,9 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
             {agency.locations[0].district}, {agency.locations[0].city}
           </p>
         </div>
-        
+
         {isFeatured && (
-          <span 
+          <span
             className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
             aria-label="Featured agency - sponsored listing"
           >
@@ -1534,7 +1540,7 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
         )}
       </header>
 
-      <div 
+      <div
         id={`agency-${agency.id}-description`}
         className="text-gray-700 mb-4"
       >
@@ -1543,7 +1549,7 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 
       <div className="flex flex-wrap gap-2 mb-4">
         {agency.services.thaiVisas.map((visa) => (
-          <span 
+          <span
             key={visa}
             className="px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded"
             aria-label={`Offers ${visa} visa services`}
@@ -1555,7 +1561,7 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 
       <footer className="flex justify-between items-center">
         <VerificationBadge verification={agency.verification} />
-        
+
         <div className="flex gap-3">
           <Link
             href={`tel:${agency.contact.phone[0]}`}
@@ -1565,7 +1571,7 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
             <PhoneIcon className="w-5 h-5" />
             <span className="sr-only">Call {agency.name}</span>
           </Link>
-          
+
           <Link
             href={`/agencies/${agency.slug}`}
             className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded px-2 py-1"
@@ -1586,8 +1592,8 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 // Comprehensive ARIA implementation examples
 
 // Search form
-<form 
-  role="search" 
+<form
+  role="search"
   aria-label="Search for visa agencies"
   onSubmit={handleSearch}
 >
@@ -1610,13 +1616,13 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 // Filter controls
 <fieldset className="border border-gray-200 rounded p-4">
   <legend className="text-lg font-semibold px-2">Filter Agencies</legend>
-  
+
   <div className="space-y-4">
     <div>
       <label htmlFor="city-filter" className="block text-sm font-medium">
         City
       </label>
-      <select 
+      <select
         id="city-filter"
         aria-describedby="city-filter-help"
         onChange={handleCityFilter}
@@ -1630,13 +1636,13 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
         Filter agencies by their primary city location
       </div>
     </div>
-    
+
     <fieldset>
       <legend className="text-sm font-medium">Verification Status</legend>
       <div className="mt-2 space-y-2">
         <label className="flex items-center">
-          <input 
-            type="checkbox" 
+          <input
+            type="checkbox"
             value="verified"
             aria-describedby="verified-help"
             onChange={handleVerificationFilter}
@@ -1652,12 +1658,12 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 </fieldset>
 
 // Results announcement
-<div 
-  aria-live="polite" 
+<div
+  aria-live="polite"
   aria-atomic="true"
   className="sr-only"
 >
-  {searchResults.length > 0 
+  {searchResults.length > 0
     ? `Found ${searchResults.length} agencies matching your search`
     : "No agencies found matching your search criteria"
   }
@@ -1671,13 +1677,13 @@ export function AgencyCard({ agency, isFeatured = false }: AgencyCardProps) {
 export function SkipLinks() {
   return (
     <div className="sr-only focus:not-sr-only">
-      <a 
+      <a
         href="#main-content"
         className="absolute top-4 left-4 bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-white"
       >
         Skip to main content
       </a>
-      <a 
+      <a
         href="#search-form"
         className="absolute top-4 left-32 bg-blue-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-white"
       >
@@ -1732,7 +1738,7 @@ export function SkipLinks() {
 </Link>
 
 // Agency links with context
-<Link 
+<Link
   href={`/agencies/${agency.slug}`}
   aria-label={`View ${agency.name} - ${agency.locations[0].city} visa services`}
 >
@@ -1756,13 +1762,13 @@ export function SkipLinks() {
 </Link>
 
 // Contact action links
-<Link 
+<Link
   href={`tel:${agency.contact.phone[0]}`}
   aria-label={`Call ${agency.name} at ${agency.contact.phone[0]}`}
 >
   Call {agency.name}
 </Link>
-<Link 
+<Link
   href={`mailto:${agency.contact.email}`}
   aria-label={`Email ${agency.name} for visa inquiries`}
 >
@@ -1784,18 +1790,18 @@ export function AgencyListing({ agencies }: { agencies: Agency[] }) {
               {agency.name} - Visa Services in {agency.locations[0].city}
             </Link>
           </h3>
-          
+
           <p>{agency.description}</p>
-          
+
           <div className="agency-actions">
-            <Link 
+            <Link
               href={`/agencies/${agency.slug}`}
               className="btn-primary"
             >
               View {agency.name} services and contact information
             </Link>
-            
-            <Link 
+
+            <Link
               href={`/agencies/${agency.slug}#contact-form`}
               className="btn-secondary"
             >
@@ -1811,13 +1817,13 @@ export function AgencyListing({ agencies }: { agencies: Agency[] }) {
 // Breadcrumb with descriptive links
 const breadcrumbItems = [
   { label: "Home", href: "/" },
-  { 
-    label: "Bangkok visa agencies", 
-    href: "/agencies/bangkok" 
+  {
+    label: "Bangkok visa agencies",
+    href: "/agencies/bangkok"
   },
-  { 
+  {
     label: `${agency.name} agency details`,
-    current: true 
+    current: true
   }
 ];
 ```
@@ -1828,12 +1834,12 @@ const breadcrumbItems = [
 
 ```typescript
 // lib/mdx.ts
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import readingTime from 'reading-time';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import readingTime from "reading-time";
 
-const contentDirectory = path.join(process.cwd(), 'content/blog');
+const contentDirectory = path.join(process.cwd(), "content/blog");
 
 export interface BlogPost {
   slug: string;
@@ -1845,9 +1851,9 @@ export interface BlogPost {
     author: string;
     image?: string;
     tags: string[];
-    category: 'visa-guides' | 'agency-news' | 'immigration-updates' | 'tips';
+    category: "visa-guides" | "agency-news" | "immigration-updates" | "tips";
     featured: boolean;
-    locale: 'en' | 'th';
+    locale: "en" | "th";
     seo: {
       metaTitle: string;
       metaDescription: string;
@@ -1866,19 +1872,19 @@ export interface BlogPost {
 
 export async function getAllPosts(locale?: string): Promise<BlogPost[]> {
   const files = fs.readdirSync(contentDirectory);
-  
+
   const posts = await Promise.all(
     files
-      .filter((file) => file.endsWith('.mdx'))
+      .filter((file) => file.endsWith(".mdx"))
       .map(async (file) => {
-        const slug = file.replace('.mdx', '');
+        const slug = file.replace(".mdx", "");
         const fullPath = path.join(contentDirectory, file);
-        const fileContents = fs.readFileSync(fullPath, 'utf8');
+        const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data, content } = matter(fileContents);
-        
+
         return {
           slug,
-          frontMatter: data as BlogPost['frontMatter'],
+          frontMatter: data as BlogPost["frontMatter"],
           content,
           readingTime: readingTime(content),
         };
@@ -1887,21 +1893,22 @@ export async function getAllPosts(locale?: string): Promise<BlogPost[]> {
 
   return posts
     .filter((post) => !locale || post.frontMatter.locale === locale)
-    .sort((a, b) => 
-      new Date(b.frontMatter.publishedAt).getTime() - 
-      new Date(a.frontMatter.publishedAt).getTime()
+    .sort(
+      (a, b) =>
+        new Date(b.frontMatter.publishedAt).getTime() -
+        new Date(a.frontMatter.publishedAt).getTime()
     );
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const fullPath = path.join(contentDirectory, `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
-    
+
     return {
       slug,
-      frontMatter: data as BlogPost['frontMatter'],
+      frontMatter: data as BlogPost["frontMatter"],
       content,
       readingTime: readingTime(content),
     };
@@ -1930,72 +1937,72 @@ export const MDXComponents = {
       {children}
     </motion.h1>
   ),
-  
+
   h2: ({ children, ...props }: any) => (
-    <h2 
+    <h2
       className="text-3xl font-semibold text-gray-900 mt-8 mb-4 border-b border-gray-200 pb-2"
       {...props}
     >
       {children}
     </h2>
   ),
-  
+
   h3: ({ children, ...props }: any) => (
-    <h3 
+    <h3
       className="text-2xl font-medium text-gray-900 mt-6 mb-3"
       {...props}
     >
       {children}
     </h3>
   ),
-  
+
   p: ({ children, ...props }: any) => (
     <p className="text-gray-700 leading-relaxed mb-4" {...props}>
       {children}
     </p>
   ),
-  
+
   ul: ({ children, ...props }: any) => (
     <ul className="list-disc list-inside mb-4 space-y-2 text-gray-700" {...props}>
       {children}
     </ul>
   ),
-  
+
   ol: ({ children, ...props }: any) => (
     <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-700" {...props}>
       {children}
     </ol>
   ),
-  
+
   blockquote: ({ children, ...props }: any) => (
-    <blockquote 
+    <blockquote
       className="border-l-4 border-blue-500 pl-6 py-2 my-6 bg-blue-50 italic text-gray-800"
       {...props}
     >
       {children}
     </blockquote>
   ),
-  
+
   code: ({ children, ...props }: any) => (
-    <code 
+    <code
       className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm font-mono"
       {...props}
     >
       {children}
     </code>
   ),
-  
+
   pre: ({ children, ...props }: any) => (
-    <pre 
+    <pre
       className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-6"
       {...props}
     >
       {children}
     </pre>
   ),
-  
+
   a: ({ href, children, ...props }: any) => (
-    <Link 
+    <Link
       href={href}
       className="text-blue-600 hover:text-blue-800 underline"
       {...props}
@@ -2003,7 +2010,7 @@ export const MDXComponents = {
       {children}
     </Link>
   ),
-  
+
   img: ({ src, alt, ...props }: any) => (
     <div className="my-6">
       <Image
@@ -2016,7 +2023,7 @@ export const MDXComponents = {
       />
     </div>
   ),
-  
+
   // Custom components for visa content
   VisaRequirement: ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div className="border border-green-200 bg-green-50 rounded-lg p-4 my-4">
@@ -2024,7 +2031,7 @@ export const MDXComponents = {
       <div className="text-green-700">{children}</div>
     </div>
   ),
-  
+
   ImportantNote: ({ children }: { children: React.ReactNode }) => (
     <div className="border border-red-200 bg-red-50 rounded-lg p-4 my-4">
       <div className="flex items-start">
@@ -2033,7 +2040,7 @@ export const MDXComponents = {
       </div>
     </div>
   ),
-  
+
   ProcessStep: ({ step, children }: { step: number; children: React.ReactNode }) => (
     <div className="flex items-start mb-4">
       <div className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 mt-1">
@@ -2062,7 +2069,14 @@ locale: "en"
 seo:
   metaTitle: "Thai Tourist Visa 2024: Complete Requirements Guide | Visa Services Thailand"
   metaDescription: "Get your Thai tourist visa approved in 2024. Complete guide covering requirements, application process, processing times, and costs for all nationalities."
-  keywords: ["thai tourist visa 2024", "thailand visa requirements", "tourist visa application", "visa on arrival thailand", "thai visa for tourists"]
+  keywords:
+    [
+      "thai tourist visa 2024",
+      "thailand visa requirements",
+      "tourist visa application",
+      "visa on arrival thailand",
+      "thai visa for tourists",
+    ]
 ---
 
 # Complete Guide to Thai Tourist Visa Requirements in 2024
@@ -2076,9 +2090,9 @@ Thailand remains one of the world's most popular tourist destinations, welcoming
 Many nationalities can enter Thailand without a visa for tourism purposes:
 
 <VisaRequirement title="Visa Exemption Requirements">
-- Valid passport with at least 6 months validity
-- Proof of onward travel within 30 days (60 days for select countries)
-- Sufficient funds (10,000 THB per person, 20,000 THB per family)
+  - Valid passport with at least 6 months validity - Proof of onward travel
+  within 30 days (60 days for select countries) - Sufficient funds (10,000 THB
+  per person, 20,000 THB per family)
 </VisaRequirement>
 
 ### 2. Visa on Arrival (VOA)
@@ -2086,22 +2100,19 @@ Many nationalities can enter Thailand without a visa for tourism purposes:
 Available for 19 specific nationalities at international airports and border crossings.
 
 <ProcessStep step={1}>
-**Prepare Required Documents**
-- Passport valid for at least 6 months
-- Recent passport-sized photograph
-- Completed application form
-- 2,000 THB fee (cash only)
+  **Prepare Required Documents** - Passport valid for at least 6 months - Recent
+  passport-sized photograph - Completed application form - 2,000 THB fee (cash
+  only)
 </ProcessStep>
 
 <ProcessStep step={2}>
-**Submit Application at Airport**
-- Go to Visa on Arrival counter
-- Submit documents and payment
-- Wait for processing (typically 15-30 minutes)
+  **Submit Application at Airport** - Go to Visa on Arrival counter - Submit
+  documents and payment - Wait for processing (typically 15-30 minutes)
 </ProcessStep>
 
 <ImportantNote>
-Visa on Arrival allows a maximum stay of 15 days and cannot be extended. Plan your trip accordingly.
+  Visa on Arrival allows a maximum stay of 15 days and cannot be extended. Plan
+  your trip accordingly.
 </ImportantNote>
 
 ### 3. Tourist Visa (TR)
@@ -2109,12 +2120,14 @@ Visa on Arrival allows a maximum stay of 15 days and cannot be extended. Plan yo
 For longer stays or multiple entries, apply for a Tourist Visa at a Thai embassy or consulate.
 
 **Single Entry Tourist Visa:**
+
 - Validity: 3 months from issue date
 - Stay: Up to 60 days
 - Extension: Possible for 30 days
 - Fee: Varies by country ($40-80 USD)
 
 **Multiple Entry Tourist Visa:**
+
 - Validity: 6 months from issue date
 - Stay: Up to 60 days per entry
 - Extension: 30 days per entry
@@ -2149,30 +2162,30 @@ For longer stays or multiple entries, apply for a Tourist Visa at a Thai embassy
 
 ## Application Process Timeline
 
-| Step | Timeline | Action Required |
-|------|----------|----------------|
-| Document Preparation | 1-2 weeks | Gather all required documents |
-| Visa Application | 1 day | Submit to embassy/consulate |
-| Processing Time | 2-5 business days | Wait for approval |
-| Passport Collection | 1 day | Collect passport with visa |
+| Step                 | Timeline          | Action Required               |
+| -------------------- | ----------------- | ----------------------------- |
+| Document Preparation | 1-2 weeks         | Gather all required documents |
+| Visa Application     | 1 day             | Submit to embassy/consulate   |
+| Processing Time      | 2-5 business days | Wait for approval             |
+| Passport Collection  | 1 day             | Collect passport with visa    |
 
 ## Processing Times by Location
 
 - **Bangkok Embassy**: 2-3 business days
-- **Consulates in Malaysia**: 1-2 business days  
+- **Consulates in Malaysia**: 1-2 business days
 - **Consulates in Cambodia**: 1 business day
 - **European Embassies**: 3-5 business days
 - **US Consulates**: 3-4 business days
 
 ## Visa Fees by Nationality
 
-| Nationality | Single Entry | Multiple Entry |
-|-------------|--------------|----------------|
-| US Citizens | $40 USD | $200 USD |
-| UK Citizens | £30 GBP | £150 GBP |
-| EU Citizens | €35 EUR | €175 EUR |
-| Australian Citizens | $45 AUD | $225 AUD |
-| Canadian Citizens | $45 CAD | $225 CAD |
+| Nationality         | Single Entry | Multiple Entry |
+| ------------------- | ------------ | -------------- |
+| US Citizens         | $40 USD      | $200 USD       |
+| UK Citizens         | £30 GBP      | £150 GBP       |
+| EU Citizens         | €35 EUR      | €175 EUR       |
+| Australian Citizens | $45 AUD      | $225 AUD       |
+| Canadian Citizens   | $45 CAD      | $225 CAD       |
 
 ## Common Reasons for Visa Rejection
 
@@ -2194,19 +2207,20 @@ For longer stays or multiple entries, apply for a Tourist Visa at a Thai embassy
 ## Tips for Successful Visa Application
 
 <ProcessStep step={1}>
-**Start Early**: Begin the application process at least 2-3 weeks before travel
+  **Start Early**: Begin the application process at least 2-3 weeks before
+  travel
 </ProcessStep>
 
 <ProcessStep step={2}>
-**Double-Check Requirements**: Each consulate may have specific requirements
+  **Double-Check Requirements**: Each consulate may have specific requirements
 </ProcessStep>
 
 <ProcessStep step={3}>
-**Organize Documents**: Present documents in order and with clear copies
+  **Organize Documents**: Present documents in order and with clear copies
 </ProcessStep>
 
 <ProcessStep step={4}>
-**Be Honest**: Provide accurate information and genuine travel plans
+  **Be Honest**: Provide accurate information and genuine travel plans
 </ProcessStep>
 
 ## Visa Extension in Thailand
@@ -2234,16 +2248,18 @@ A: Generally no, you must leave Thailand and apply for a different visa type.
 If you need assistance with your tourist visa application, consider using professional visa services in Bangkok:
 
 - **Siam Legal International** - Sukhumvit area specialists
-- **Bangkok Visa Centre** - One-stop visa solutions  
+- **Bangkok Visa Centre** - One-stop visa solutions
 - **Thailand Visa Express** - Fast-track processing
 
 <ImportantNote>
-Always verify current requirements with the nearest Thai embassy or consulate, as visa policies can change. This guide reflects requirements as of January 2024.
+  Always verify current requirements with the nearest Thai embassy or consulate,
+  as visa policies can change. This guide reflects requirements as of January
+  2024.
 </ImportantNote>
 
 ---
 
-*Need help with your Thai tourist visa application? Contact our recommended visa agencies for professional assistance and faster processing.*
+_Need help with your Thai tourist visa application? Contact our recommended visa agencies for professional assistance and faster processing._
 ```
 
 ## IndexNow Integration for SEO
@@ -2262,10 +2278,10 @@ interface IndexNowSubmission {
 export class IndexNowService {
   private key: string;
   private host: string;
-  
+
   constructor() {
     this.key = process.env.NEXT_PUBLIC_INDEXNOW_KEY!;
-    this.host = 'visaservicesthailand.directory';
+    this.host = "visaservicesthailand.directory";
   }
 
   async submitUrls(urls: string[]): Promise<boolean> {
@@ -2274,21 +2290,21 @@ export class IndexNowService {
         host: this.host,
         key: this.key,
         keyLocation: `https://${this.host}/${this.key}.txt`,
-        urlList: urls.map(url => `https://${this.host}${url}`),
+        urlList: urls.map((url) => `https://${this.host}${url}`),
       };
 
       // Submit to IndexNow API
-      const response = await fetch('https://api.indexnow.org/indexnow', {
-        method: 'POST',
+      const response = await fetch("https://api.indexnow.org/indexnow", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(submission),
       });
 
       return response.ok;
     } catch (error) {
-      console.error('IndexNow submission failed:', error);
+      console.error("IndexNow submission failed:", error);
       return false;
     }
   }
@@ -2296,26 +2312,21 @@ export class IndexNowService {
   async submitNewBlogPost(slug: string): Promise<void> {
     const urls = [
       `/blog/${slug}`,
-      '/blog', // Blog listing page
-      '/', // Homepage (if blog is featured)
+      "/blog", // Blog listing page
+      "/", // Homepage (if blog is featured)
     ];
-    
+
     await this.submitUrls(urls);
   }
 
   async submitNewAgency(slug: string, city: string): Promise<void> {
-    const urls = [
-      `/agencies/${slug}`,
-      `/agencies/${city}`,
-      '/agencies',
-      '/',
-    ];
-    
+    const urls = [`/agencies/${slug}`, `/agencies/${city}`, "/agencies", "/"];
+
     await this.submitUrls(urls);
   }
 
   async submitSitemapUpdate(): Promise<void> {
-    await this.submitUrls(['/sitemap.xml']);
+    await this.submitUrls(["/sitemap.xml"]);
   }
 }
 
@@ -2327,14 +2338,14 @@ export const indexNow = new IndexNowService();
 
 ```typescript
 // lib/seo.ts - SEO utilities with IndexNow integration
-import { indexNow } from './indexnow';
+import { indexNow } from "./indexnow";
 
 export async function publishBlogPost(slug: string) {
   // 1. Generate static page
   // 2. Update sitemap
   // 3. Submit to IndexNow
   await indexNow.submitNewBlogPost(slug);
-  
+
   // 4. Update RSS feed
   await generateRSSFeed();
 }
@@ -2344,7 +2355,7 @@ export async function addNewAgency(agency: Agency) {
   // 2. Generate agency page
   // 3. Submit to IndexNow
   await indexNow.submitNewAgency(agency.slug, agency.locations[0].city);
-  
+
   // 4. Update structured data
   await updateAgencyStructuredData();
 }
@@ -2360,67 +2371,75 @@ export function generateAgencyStructuredData(agency: Agency) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": agency.name,
-    "alternateName": agency.nameTh,
-    "description": agency.description,
-    "url": `https://visaservicesthailand.directory/agencies/${agency.slug}`,
-    "image": agency.image ? `https://visaservicesthailand.directory${agency.image}` : undefined,
-    "telephone": agency.contact.phone[0],
-    "email": agency.contact.email,
-    "address": {
+    name: agency.name,
+    alternateName: agency.nameTh,
+    description: agency.description,
+    url: `https://visaservicesthailand.directory/agencies/${agency.slug}`,
+    image: agency.image
+      ? `https://visaservicesthailand.directory${agency.image}`
+      : undefined,
+    telephone: agency.contact.phone[0],
+    email: agency.contact.email,
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": agency.locations[0].address,
-      "addressLocality": agency.locations[0].district,
-      "addressRegion": agency.locations[0].province,
-      "addressCountry": "TH"
+      streetAddress: agency.locations[0].address,
+      addressLocality: agency.locations[0].district,
+      addressRegion: agency.locations[0].province,
+      addressCountry: "TH",
     },
-    "geo": agency.locations[0].coordinates ? {
-      "@type": "GeoCoordinates",
-      "latitude": agency.locations[0].coordinates.lat,
-      "longitude": agency.locations[0].coordinates.lng
-    } : undefined,
-    "aggregateRating": agency.reviewData ? {
-      "@type": "AggregateRating",
-      "ratingValue": agency.reviewData.rating,
-      "reviewCount": agency.reviewData.totalReviews,
-      "bestRating": 5,
-      "worstRating": 1
-    } : undefined,
-    "serviceType": "Visa Services",
-    "areaServed": {
+    geo: agency.locations[0].coordinates
+      ? {
+          "@type": "GeoCoordinates",
+          latitude: agency.locations[0].coordinates.lat,
+          longitude: agency.locations[0].coordinates.lng,
+        }
+      : undefined,
+    aggregateRating: agency.reviewData
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: agency.reviewData.rating,
+          reviewCount: agency.reviewData.totalReviews,
+          bestRating: 5,
+          worstRating: 1,
+        }
+      : undefined,
+    serviceType: "Visa Services",
+    areaServed: {
       "@type": "Country",
-      "name": "Thailand"
+      name: "Thailand",
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Visa Services",
-      "itemListElement": [
-        ...agency.services.thaiVisas.map(visa => ({
+      name: "Visa Services",
+      itemListElement: [
+        ...agency.services.thaiVisas.map((visa) => ({
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Service",
-            "name": `Thai ${visa} Visa Service`,
-            "serviceType": "Visa Application Assistance"
-          }
+            name: `Thai ${visa} Visa Service`,
+            serviceType: "Visa Application Assistance",
+          },
         })),
-        ...agency.services.foreignVisas.map(visa => ({
+        ...agency.services.foreignVisas.map((visa) => ({
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Service",
-            "name": `${visa.toUpperCase()} Visa Service for Thai Citizens`,
-            "serviceType": "Visa Application Assistance"
-          }
-        }))
-      ]
+            name: `${visa.toUpperCase()} Visa Service for Thai Citizens`,
+            serviceType: "Visa Application Assistance",
+          },
+        })),
+      ],
     },
-    "founder": agency.established ? {
-      "@type": "Organization",
-      "foundingDate": agency.established.toString()
-    } : undefined,
-    "sameAs": [
+    founder: agency.established
+      ? {
+          "@type": "Organization",
+          foundingDate: agency.established.toString(),
+        }
+      : undefined,
+    sameAs: [
       agency.contact.website,
-      `https://www.google.com/maps/place/?q=place_id:${agency.googlePlaceId}`
-    ].filter(Boolean)
+      `https://www.google.com/maps/place/?q=place_id:${agency.googlePlaceId}`,
+    ].filter(Boolean),
   };
 }
 ```
@@ -2432,73 +2451,73 @@ export function generateArticleStructuredData(post: BlogPost, content: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": post.frontMatter.title,
-    "description": post.frontMatter.description,
-    "image": post.frontMatter.image ? 
-      `https://visaservicesthailand.directory${post.frontMatter.image}` : 
-      "https://visaservicesthailand.directory/images/default-blog.jpg",
-    "author": {
+    headline: post.frontMatter.title,
+    description: post.frontMatter.description,
+    image: post.frontMatter.image
+      ? `https://visaservicesthailand.directory${post.frontMatter.image}`
+      : "https://visaservicesthailand.directory/images/default-blog.jpg",
+    author: {
       "@type": "Organization",
-      "name": post.frontMatter.author,
-      "url": "https://visaservicesthailand.directory"
+      name: post.frontMatter.author,
+      url: "https://visaservicesthailand.directory",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Visa Services Thailand Directory",
-      "logo": {
+      name: "Visa Services Thailand Directory",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://visaservicesthailand.directory/images/logo.png"
-      }
+        url: "https://visaservicesthailand.directory/images/logo.png",
+      },
     },
-    "datePublished": post.frontMatter.publishedAt,
-    "dateModified": post.frontMatter.updatedAt || post.frontMatter.publishedAt,
-    "mainEntityOfPage": {
+    datePublished: post.frontMatter.publishedAt,
+    dateModified: post.frontMatter.updatedAt || post.frontMatter.publishedAt,
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://visaservicesthailand.directory/blog/${post.slug}`
+      "@id": `https://visaservicesthailand.directory/blog/${post.slug}`,
     },
-    "articleSection": post.frontMatter.category,
-    "keywords": post.frontMatter.seo.keywords.join(", "),
-    "wordCount": post.readingTime.words,
-    "timeRequired": `PT${Math.ceil(post.readingTime.minutes)}M`,
-    "about": {
+    articleSection: post.frontMatter.category,
+    keywords: post.frontMatter.seo.keywords.join(", "),
+    wordCount: post.readingTime.words,
+    timeRequired: `PT${Math.ceil(post.readingTime.minutes)}M`,
+    about: {
       "@type": "Thing",
-      "name": "Thailand Visa Services"
+      name: "Thailand Visa Services",
     },
-    "mentions": extractMentions(content), // Extract agency/location mentions
-    "isPartOf": {
+    mentions: extractMentions(content), // Extract agency/location mentions
+    isPartOf: {
       "@type": "Blog",
-      "name": "Visa Services Thailand Blog",
-      "url": "https://visaservicesthailand.directory/blog"
-    }
+      name: "Visa Services Thailand Blog",
+      url: "https://visaservicesthailand.directory/blog",
+    },
   };
 }
 
 function extractMentions(content: string) {
   // Extract agency names, cities, visa types mentioned in content
   const mentions = [];
-  
+
   // This would be more sophisticated in practice
-  const cities = ['Bangkok', 'Phuket', 'Chiang Mai', 'Pattaya'];
-  const visaTypes = ['Tourist Visa', 'Business Visa', 'Retirement Visa'];
-  
-  cities.forEach(city => {
+  const cities = ["Bangkok", "Phuket", "Chiang Mai", "Pattaya"];
+  const visaTypes = ["Tourist Visa", "Business Visa", "Retirement Visa"];
+
+  cities.forEach((city) => {
     if (content.includes(city)) {
       mentions.push({
         "@type": "Place",
-        "name": city
+        name: city,
       });
     }
   });
-  
-  visaTypes.forEach(visa => {
+
+  visaTypes.forEach((visa) => {
     if (content.includes(visa)) {
       mentions.push({
         "@type": "Service",
-        "name": visa
+        name: visa,
       });
     }
   });
-  
+
   return mentions;
 }
 ```
@@ -2510,32 +2529,34 @@ export function generateWebsiteStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Visa Services Thailand Directory",
-    "alternateName": "Thailand Visa Directory",
-    "url": "https://visaservicesthailand.directory",
-    "description": "Comprehensive directory of verified visa services in Thailand. Find trusted agencies for Thai visas, foreign visas, and immigration assistance.",
-    "inLanguage": ["en", "th", "zh"],
-    "potentialAction": {
+    name: "Visa Services Thailand Directory",
+    alternateName: "Thailand Visa Directory",
+    url: "https://visaservicesthailand.directory",
+    description:
+      "Comprehensive directory of verified visa services in Thailand. Find trusted agencies for Thai visas, foreign visas, and immigration assistance.",
+    inLanguage: ["en", "th", "zh"],
+    potentialAction: {
       "@type": "SearchAction",
-      "target": {
+      target: {
         "@type": "EntryPoint",
-        "urlTemplate": "https://visaservicesthailand.directory/search?q={search_term_string}"
+        urlTemplate:
+          "https://visaservicesthailand.directory/search?q={search_term_string}",
       },
-      "query-input": "required name=search_term_string"
+      "query-input": "required name=search_term_string",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Visa Services Thailand Directory",
-      "logo": {
+      name: "Visa Services Thailand Directory",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://visaservicesthailand.directory/images/logo.png"
+        url: "https://visaservicesthailand.directory/images/logo.png",
       },
-      "contactPoint": {
+      contactPoint: {
         "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "info@visaservicesthailand.directory"
-      }
-    }
+        contactType: "customer service",
+        email: "info@visaservicesthailand.directory",
+      },
+    },
   };
 }
 ```
@@ -2556,13 +2577,16 @@ interface SEOMetadata {
   structuredData?: object;
 }
 
-export function generateSEOMetadata(type: 'agency' | 'blog' | 'page', data: any): SEOMetadata {
+export function generateSEOMetadata(
+  type: "agency" | "blog" | "page",
+  data: any
+): SEOMetadata {
   switch (type) {
-    case 'agency':
+    case "agency":
       return generateAgencySEO(data);
-    case 'blog':
+    case "blog":
       return generateBlogSEO(data);
-    case 'page':
+    case "page":
       return generatePageSEO(data);
     default:
       return generateDefaultSEO();
@@ -2572,22 +2596,24 @@ export function generateSEOMetadata(type: 'agency' | 'blog' | 'page', data: any)
 function generateAgencySEO(agency: Agency): SEOMetadata {
   const city = agency.locations[0].city;
   const district = agency.locations[0].district;
-  const services = agency.services.thaiVisas.slice(0, 3).join(', ');
-  
+  const services = agency.services.thaiVisas.slice(0, 3).join(", ");
+
   return {
     title: `${agency.name} - ${city} Visa Services | Thailand Visa Directory`,
-    description: `${agency.name} in ${district}, ${city} offers ${services} and more. ${agency.verification.status === 'verified' ? 'Verified agency' : 'Visa services'} with contact details and reviews.`,
+    description: `${agency.name} in ${district}, ${city} offers ${services} and more. ${agency.verification.status === "verified" ? "Verified agency" : "Visa services"} with contact details and reviews.`,
     keywords: [
       `${agency.name.toLowerCase()}`,
       `visa services ${city.toLowerCase()}`,
       `${city.toLowerCase()} visa agency`,
       `thailand visa ${district.toLowerCase()}`,
-      ...agency.services.thaiVisas.map(visa => `${visa} visa ${city.toLowerCase()}`),
-      ...agency.services.foreignVisas.map(visa => `${visa} visa thailand`),
+      ...agency.services.thaiVisas.map(
+        (visa) => `${visa} visa ${city.toLowerCase()}`
+      ),
+      ...agency.services.foreignVisas.map((visa) => `${visa} visa thailand`),
     ],
     canonicalUrl: `https://visaservicesthailand.directory/agencies/${agency.slug}`,
     ogImage: agency.image || `/images/og/agency-${city.toLowerCase()}.jpg`,
-    structuredData: generateAgencyStructuredData(agency)
+    structuredData: generateAgencyStructuredData(agency),
   };
 }
 
@@ -2596,10 +2622,11 @@ function generateBlogSEO(post: BlogPost): SEOMetadata {
     title: post.frontMatter.seo.metaTitle,
     description: post.frontMatter.seo.metaDescription,
     keywords: post.frontMatter.seo.keywords,
-    canonicalUrl: post.frontMatter.seo.canonicalUrl || 
-                  `https://visaservicesthailand.directory/blog/${post.slug}`,
-    ogImage: post.frontMatter.image || '/images/og/blog-default.jpg',
-    structuredData: generateArticleStructuredData(post, post.content)
+    canonicalUrl:
+      post.frontMatter.seo.canonicalUrl ||
+      `https://visaservicesthailand.directory/blog/${post.slug}`,
+    ogImage: post.frontMatter.image || "/images/og/blog-default.jpg",
+    structuredData: generateArticleStructuredData(post, post.content),
   };
 }
 ```
@@ -2610,44 +2637,47 @@ function generateBlogSEO(post: BlogPost): SEOMetadata {
 // lib/keywords.ts - Long-tail keyword generation
 export const keywordTemplates = {
   agencyLocation: [
-    '{service} visa agency in {city}',
-    '{city} {service} visa services',
-    'best visa agency {district} {city}',
-    '{service} visa application {city}',
-    'visa services near {district}',
-    '{city} immigration services {service}',
+    "{service} visa agency in {city}",
+    "{city} {service} visa services",
+    "best visa agency {district} {city}",
+    "{service} visa application {city}",
+    "visa services near {district}",
+    "{city} immigration services {service}",
   ],
-  
+
   visaGuides: [
-    'how to apply for {visa} visa thailand {year}',
-    '{visa} visa requirements thailand {year}',
-    '{visa} visa application process {year}',
-    '{visa} visa documents needed thailand',
-    '{visa} visa cost thailand {year}',
-    'thailand {visa} visa processing time',
+    "how to apply for {visa} visa thailand {year}",
+    "{visa} visa requirements thailand {year}",
+    "{visa} visa application process {year}",
+    "{visa} visa documents needed thailand",
+    "{visa} visa cost thailand {year}",
+    "thailand {visa} visa processing time",
   ],
-  
+
   locationSpecific: [
-    '{city} visa agencies directory',
-    'visa services {province} thailand',
-    '{city} immigration office location',
-    'best visa agent {city} {year}',
-    '{city} visa extension services',
+    "{city} visa agencies directory",
+    "visa services {province} thailand",
+    "{city} immigration office location",
+    "best visa agent {city} {year}",
+    "{city} visa extension services",
   ],
-  
+
   serviceSpecific: [
-    '{nationality} visa for thailand',
-    'thailand visa for {nationality} citizens',
-    '{visa} visa extension thailand',
-    '{visa} visa multiple entry thailand',
-    'urgent {visa} visa thailand',
-  ]
+    "{nationality} visa for thailand",
+    "thailand visa for {nationality} citizens",
+    "{visa} visa extension thailand",
+    "{visa} visa multiple entry thailand",
+    "urgent {visa} visa thailand",
+  ],
 };
 
-export function generateKeywords(template: string, variables: Record<string, string>): string {
+export function generateKeywords(
+  template: string,
+  variables: Record<string, string>
+): string {
   let result = template;
   Object.entries(variables).forEach(([key, value]) => {
-    result = result.replace(new RegExp(`{${key}}`, 'g'), value);
+    result = result.replace(new RegExp(`{${key}}`, "g"), value);
   });
   return result;
 }
@@ -2656,25 +2686,25 @@ export function generateAgencyKeywords(agency: Agency): string[] {
   const city = agency.locations[0].city;
   const district = agency.locations[0].district;
   const province = agency.locations[0].province;
-  
+
   const keywords: string[] = [];
-  
+
   // Generate location-based keywords
-  keywordTemplates.agencyLocation.forEach(template => {
-    agency.services.thaiVisas.forEach(service => {
+  keywordTemplates.agencyLocation.forEach((template) => {
+    agency.services.thaiVisas.forEach((service) => {
       keywords.push(generateKeywords(template, { service, city, district }));
     });
   });
-  
+
   // Add service-specific keywords
-  keywordTemplates.serviceSpecific.forEach(template => {
-    agency.languages.forEach(nationality => {
-      agency.services.thaiVisas.forEach(visa => {
+  keywordTemplates.serviceSpecific.forEach((template) => {
+    agency.languages.forEach((nationality) => {
+      agency.services.thaiVisas.forEach((visa) => {
         keywords.push(generateKeywords(template, { nationality, visa }));
       });
     });
   });
-  
+
   return keywords;
 }
 ```
@@ -2707,11 +2737,11 @@ export function SEOHead({
 }: SEOHeadProps) {
   const router = useRouter();
   const { locale } = router;
-  
+
   const fullTitle = `${title} | Visa Services Thailand Directory`;
   const currentUrl = canonicalUrl || `https://visaservicesthailand.directory${router.asPath}`;
   const defaultImage = 'https://visaservicesthailand.directory/images/og-default.jpg';
-  
+
   return (
     <Head>
       {/* Basic Meta Tags */}
@@ -2720,17 +2750,17 @@ export function SEOHead({
       {keywords.length > 0 && (
         <meta name="keywords" content={keywords.join(', ')} />
       )}
-      
+
       {/* Robots */}
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       )}
-      
+
       {/* Canonical URL */}
       <link rel="canonical" href={currentUrl} />
-      
+
       {/* Open Graph */}
       <meta property="og:type" content="website" />
       <meta property="og:title" content={fullTitle} />
@@ -2741,17 +2771,17 @@ export function SEOHead({
       <meta property="og:image:height" content="630" />
       <meta property="og:locale" content={locale === 'th' ? 'th_TH' : locale === 'zh' ? 'zh_CN' : 'en_US'} />
       <meta property="og:site_name" content="Visa Services Thailand Directory" />
-      
+
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage || defaultImage} />
-      
+
       {/* Additional SEO */}
       <meta name="author" content="Visa Services Thailand Directory" />
       <meta name="publisher" content="Visa Services Thailand Directory" />
-      
+
       {/* Structured Data */}
       {structuredData && (
         <script
@@ -2761,7 +2791,7 @@ export function SEOHead({
           }}
         />
       )}
-      
+
       {/* Hreflang for multilingual */}
       <link rel="alternate" hrefLang="en" href={currentUrl.replace(/\/(th|zh)\//, '/en/')} />
       <link rel="alternate" hrefLang="th" href={currentUrl.replace(/\/(en|zh)\//, '/th/')} />
@@ -3118,6 +3148,34 @@ endorsed by this directory.
 
 ## Analytics Setup
 
+### Plausible Tracking Script
+
+```html
+<script
+  defer
+  data-domain="visaservicesthailand.directory"
+  src="https://analytics.developedbywill.com/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"
+></script>
+<script>
+  window.plausible =
+    window.plausible ||
+    function () {
+      (window.plausible.q = window.plausible.q || []).push(arguments);
+    };
+</script>
+```
+
+**Enabled Extensions:**
+
+- **file-downloads**: Track PDF guide downloads, document downloads
+- **hash**: Track hash changes for single-page navigation
+- **outbound-links**: Monitor clicks to agency websites and external links
+- **pageview-props**: Enhanced page-level analytics with custom properties
+- **revenue**: Track featured listing conversions and revenue
+- **tagged-events**: Custom event tracking for user interactions
+
+### Custom Events Implementation
+
 ```javascript
 // Plausible custom events
 plausible("Agency View", {
@@ -3285,19 +3343,16 @@ hotfix/* - Urgent fixes
 ## Outstanding Decisions
 
 1. **Verification Criteria**
-
    - Physical office visit required?
    - Minimum years in business?
    - Required documentation?
 
 2. **Payment Processing**
-
    - Bank transfer only?
    - Add PayPal/Stripe later?
    - Invoice system needed?
 
 3. **Chinese Market Strategy**
-
    - Focus markets (mainland/HK/Taiwan)?
    - WeChat mini-program later?
    - Simplified vs Traditional Chinese?
